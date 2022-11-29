@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "allTests": "npx playwright test tests/theInternet",
+    "chrome": "npx playwright test tests/theInternet --project=GoogleChrome",
+    "chrome-h": "npx playwright test tests/theInternet --project=GoogleChrome --headed",
+    "chrome-h-d": "npx playwright test tests/theInternet --project=GoogleChrome --headed --debug",
+    "report": "npx playwright show-report"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
