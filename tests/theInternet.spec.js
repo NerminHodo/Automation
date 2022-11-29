@@ -6,7 +6,7 @@ test.describe("The Internet", () => {
     await page.goto("https://the-internet.herokuapp.com/");
   });
 
-  test.only("image test", async ({ page }) => {
+  test("image test", async ({ page }) => {
     expect(await page.screenshot({ fullPage: true })).toMatchSnapshot({
       maxDiffPixels: 200,
     });
