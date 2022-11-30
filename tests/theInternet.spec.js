@@ -1,7 +1,7 @@
 // @ts-check
 const { test, expect } = require("@playwright/test");
 
-test.describe("The Internet", () => {
+test.describe("the-internet", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("https://the-internet.herokuapp.com/");
   });
@@ -20,9 +20,7 @@ test.describe("The Internet", () => {
   });
   test("Add/Remove Elements", async ({ page }) => {
     await page.click("text = Add/Remove Elements");
-    await expect(page).toHaveURL(
-      "https://the-internet.herokuapp.com/add_remove_elements/"
-    );
+    await expect(page).toHaveURL("https://the-internet.herokuapp.com/add_remove_elements/");
     await page.click('//*[@id="content"]/div/button');
     await expect(page.locator('//*[@id="elements"]/button')).toBeVisible();
     await page.click('//*[@id="elements"]/button');
@@ -110,12 +108,8 @@ test.describe("The Internet", () => {
     await page.uncheck('//*[@id="checkboxes"]/input[2]');
     await page.uncheck('//*[@id="checkboxes"]/input[1]');
 
-    expect(
-      await page.locator('//*[@id="checkboxes"]/input[1]').isChecked()
-    ).toBeFalsy();
-    expect(
-      await page.locator('//*[@id="checkboxes"]/input[2]').isChecked()
-    ).toBeFalsy();
+    expect(await page.locator('//*[@id="checkboxes"]/input[1]').isChecked()).toBeFalsy();
+    expect(await page.locator('//*[@id="checkboxes"]/input[2]').isChecked()).toBeFalsy();
   });
 
   test("Context Menu", async ({ page }) => {
@@ -185,16 +179,12 @@ test.describe("The Internet", () => {
     await page.click("text = Dynamic Content");
 
     let a = await page.innerText('//*[@id="content"]/div[1]/div[2]');
-    let textBeforeReload = await page.innerText(
-      '//*[@id="content"]/div[3]/div[2]'
-    );
+    let textBeforeReload = await page.innerText('//*[@id="content"]/div[3]/div[2]');
 
     await page.reload();
 
     let b = await page.innerText('//*[@id="content"]/div[1]/div[2]');
-    let textAfterReload = await page.innerText(
-      '//*[@id="content"]/div[3]/div[2]'
-    );
+    let textAfterReload = await page.innerText('//*[@id="content"]/div[3]/div[2]');
 
     expect(a !== b);
     expect(textBeforeReload !== textAfterReload);
@@ -229,9 +219,7 @@ test.describe("The Internet", () => {
     await page.locator('//*[@id="input-example"]/input').fill("The Internet");
     await page.click('//*[@id="input-example"]/button');
     await expect(page.locator('//*[@id="input-example"]/input')).toBeDisabled();
-    await expect(page.locator('//*[@id="input-example"]/input')).toHaveValue(
-      "The Internet"
-    );
+    await expect(page.locator('//*[@id="input-example"]/input')).toHaveValue("The Internet");
   });
 
   test("Dynamic Loading / Example 1", async ({ page }) => {
@@ -295,15 +283,11 @@ test.describe("The Internet", () => {
   test("File Upload", async ({ page }) => {
     await page.click("text = File Upload");
 
-    await page
-      .locator("#file-upload")
-      .setInputFiles("uploadedFiles/theInternet.pdf");
+    await page.locator("#file-upload").setInputFiles("uploadedFiles/theInternet.pdf");
 
     await page.click("#file-submit");
 
-    await expect(page.locator('//*[@id="content"]/div/h3')).toHaveText(
-      "File Uploaded!"
-    );
+    await expect(page.locator('//*[@id="content"]/div/h3')).toHaveText("File Uploaded!");
     await expect(page.locator("#uploaded-files")).toHaveText("theInternet.pdf");
   });
 
@@ -312,24 +296,16 @@ test.describe("The Internet", () => {
     await page.mouse.wheel(0, 2000);
 
     await page.click('//*[@id="menu"]/ul/li[1]/a');
-    await expect(page).toHaveURL(
-      "https://the-internet.herokuapp.com/floating_menu#home"
-    );
+    await expect(page).toHaveURL("https://the-internet.herokuapp.com/floating_menu#home");
 
     await page.click('//*[@id="menu"]/ul/li[2]/a');
-    await expect(page).toHaveURL(
-      "https://the-internet.herokuapp.com/floating_menu#news"
-    );
+    await expect(page).toHaveURL("https://the-internet.herokuapp.com/floating_menu#news");
 
     await page.click('//*[@id="menu"]/ul/li[3]/a');
-    await expect(page).toHaveURL(
-      "https://the-internet.herokuapp.com/floating_menu#contact"
-    );
+    await expect(page).toHaveURL("https://the-internet.herokuapp.com/floating_menu#contact");
 
     await page.click('//*[@id="menu"]/ul/li[4]/a');
-    await expect(page).toHaveURL(
-      "https://the-internet.herokuapp.com/floating_menu#about"
-    );
+    await expect(page).toHaveURL("https://the-internet.herokuapp.com/floating_menu#about");
   });
 
   test("Forgot Password", async ({ page }) => {
@@ -365,9 +341,7 @@ test.describe("The Internet", () => {
     await page.locator("#password").fill("SuperSecretPassword!");
     await page.click('//*[@id="login"]/button/i');
     await expect(page.locator("#flash-messages")).toBeVisible();
-    await expect(page.locator("#flash")).toContainText(
-      "Your username is invalid!"
-    );
+    await expect(page.locator("#flash")).toContainText("Your username is invalid!");
   });
 
   test("Form Authentication / invalid password", async ({ page }) => {
@@ -376,24 +350,31 @@ test.describe("The Internet", () => {
     await page.locator("#password").fill("theInternet!");
     await page.click('//*[@id="login"]/button/i');
     await expect(page.locator("#flash-messages")).toBeVisible();
-    await expect(page.locator("#flash")).toContainText(
-      "Your password is invalid!"
-    );
+    await expect(page.locator("#flash")).toContainText("Your password is invalid!");
   });
 
-  test("Frames / Nested Frames", async ({ page }) => {
+  test.only("Frames / Nested Frames", async ({ page }) => {
     await page.click("text = Frames");
     await page.click("text = Nested Frames");
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
+
+    const frameTop = page.frameLocator('frame[name="frame-top"]').locator("html");
+    const frameBottom = page.frameLocator('frame[name="frame-bottom"]').locator("html");
+
+    await expect(frameBottom).toContainText("BOTTOM");
+    await expect(frameBottom).toBeVisible();
+
+    const frameLeft = frameTop.frameLocator('frame[name="frame-left"]').locator("html");
+    const frameMiddle = frameTop.frameLocator('frame[name="frame-middle"]').locator("html");
+    const frameRight = frameTop.frameLocator('frame[name="frame-right"]').locator("html");
+
+    await expect(frameLeft).toContainText("LEFT");
+    await expect(frameLeft).toBeVisible();
+
+    await expect(frameMiddle).toContainText("MIDDLE");
+    await expect(frameMiddle).toBeVisible();
+
+    await expect(frameRight).toContainText("RIGHT");
+    await expect(frameRight).toBeVisible();
   });
 
   test("Frames / iFrame", async ({ page }) => {
@@ -402,9 +383,7 @@ test.describe("The Internet", () => {
 
     const frameTest = page.frameLocator("#mce_0_ifr").locator("html");
 
-    await expect(frameTest.locator("#tinymce")).toHaveText(
-      "Your content goes here."
-    );
+    await expect(frameTest.locator("#tinymce")).toHaveText("Your content goes here.");
 
     await frameTest.click();
     for (let i = 0; i < 30; i++) {
@@ -444,42 +423,24 @@ test.describe("The Internet", () => {
       page.locator('//*[@id="content"]/div/div[1]/div'),
       "1rd image details should be visible"
     ).toBeVisible();
-    await expect(
-      page.locator('//*[@id="content"]/div/div[2]/div'),
-      "2rd image details should be hidden"
-    ).toBeHidden();
-    await expect(
-      page.locator('//*[@id="content"]/div/div[3]/div'),
-      "3rd image details should be hidden"
-    ).toBeHidden();
+    await expect(page.locator('//*[@id="content"]/div/div[2]/div'), "2rd image details should be hidden").toBeHidden();
+    await expect(page.locator('//*[@id="content"]/div/div[3]/div'), "3rd image details should be hidden").toBeHidden();
 
     await page.hover('//*[@id="content"]/div/div[2]');
     await expect(
       page.locator('//*[@id="content"]/div/div[2]/div'),
       "2rd image details should be visible"
     ).toBeVisible();
-    await expect(
-      page.locator('//*[@id="content"]/div/div[1]/div'),
-      "1rd image details should be hidden"
-    ).toBeHidden();
-    await expect(
-      page.locator('//*[@id="content"]/div/div[3]/div'),
-      "3rd image details should be hidden"
-    ).toBeHidden();
+    await expect(page.locator('//*[@id="content"]/div/div[1]/div'), "1rd image details should be hidden").toBeHidden();
+    await expect(page.locator('//*[@id="content"]/div/div[3]/div'), "3rd image details should be hidden").toBeHidden();
 
     await page.hover('//*[@id="content"]/div/div[3]');
     await expect(
       page.locator('//*[@id="content"]/div/div[3]/div'),
       "3rd image details should be visible"
     ).toBeVisible();
-    await expect(
-      page.locator('//*[@id="content"]/div/div[1]/div'),
-      "1st image details should be hidden"
-    ).toBeHidden();
-    await expect(
-      page.locator('//*[@id="content"]/div/div[2]/div'),
-      "2nd image details should be hidden"
-    ).toBeHidden();
+    await expect(page.locator('//*[@id="content"]/div/div[1]/div'), "1st image details should be hidden").toBeHidden();
+    await expect(page.locator('//*[@id="content"]/div/div[2]/div'), "2nd image details should be hidden").toBeHidden();
   });
 
   test("Infinite Scroll", async ({ page }) => {
@@ -502,12 +463,8 @@ test.describe("The Internet", () => {
 
   test("Inputs", async ({ page }) => {
     await page.click("text = Inputs");
-    await page
-      .locator('//*[@id="content"]/div/div/div/input')
-      .type('12dfDF!"@{34');
-    await expect(
-      page.locator('//*[@id="content"]/div/div/div/input')
-    ).toHaveValue("1234");
+    await page.locator('//*[@id="content"]/div/div/div/input').type('12dfDF!"@{34');
+    await expect(page.locator('//*[@id="content"]/div/div/div/input')).toHaveValue("1234");
   });
 
   test("JQuery UI Menus", async ({ page }) => {
@@ -530,9 +487,7 @@ test.describe("The Internet", () => {
       await dialog.accept();
     });
     await page.click('//*[@id="content"]/div/ul/li[1]/button');
-    await expect(page.locator('//*[@id="result"]')).toHaveText(
-      "You successfully clicked an alert"
-    );
+    await expect(page.locator('//*[@id="result"]')).toHaveText("You successfully clicked an alert");
   });
 
   test("JavaScript Alerts / Confirm-OK", async ({ page }) => {
@@ -543,9 +498,7 @@ test.describe("The Internet", () => {
       await dialog.accept();
     });
     await page.click('//*[@id="content"]/div/ul/li[2]/button');
-    await expect(page.locator('//*[@id="result"]')).toHaveText(
-      "You clicked: Ok"
-    );
+    await expect(page.locator('//*[@id="result"]')).toHaveText("You clicked: Ok");
   });
 
   test("JavaScript Alerts / Confirm-Cancel", async ({ page }) => {
@@ -556,9 +509,7 @@ test.describe("The Internet", () => {
       await dialog.dismiss();
     });
     await page.click('//*[@id="content"]/div/ul/li[2]/button');
-    await expect(page.locator('//*[@id="result"]')).toHaveText(
-      "You clicked: Cancel"
-    );
+    await expect(page.locator('//*[@id="result"]')).toHaveText("You clicked: Cancel");
   });
 
   test("JavaScript Alerts / Prompt", async ({ page }) => {
@@ -568,9 +519,7 @@ test.describe("The Internet", () => {
       await dialog.accept("The Internet");
     });
     await page.click('//*[@id="content"]/div/ul/li[3]/button');
-    await expect(page.locator('//*[@id="result"]')).toHaveText(
-      "You entered: The Internet"
-    );
+    await expect(page.locator('//*[@id="result"]')).toHaveText("You entered: The Internet");
   });
 
   test("JavaScript onload event error", async ({ page }) => {
@@ -631,24 +580,7 @@ test.describe("The Internet", () => {
       page.locator('//*[@id="content"]/div/a').click(),
     ]);
 
-    await expect(newPage).toHaveURL(
-      "https://the-internet.herokuapp.com/windows/new"
-    );
-  });
-
-  test("Nested Frames", async ({ page }) => {
-    await page.click("text = Nested Frames");
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
+    await expect(newPage).toHaveURL("https://the-internet.herokuapp.com/windows/new");
   });
 
   test("Notification Messages", async ({ page }) => {
@@ -660,9 +592,7 @@ test.describe("The Internet", () => {
   test("Redirect Link", async ({ page }) => {
     await page.click("text = Redirect Link");
     await page.click("#redirect");
-    await expect(page).toHaveURL(
-      "https://the-internet.herokuapp.com/status_codes"
-    );
+    await expect(page).toHaveURL("https://the-internet.herokuapp.com/status_codes");
   });
 
   test("Secure File Download", async ({ page }) => {
@@ -732,26 +662,21 @@ test.describe("The Internet", () => {
     await page.locator("tr").first().waitFor();
     await page.locator("td").first().waitFor();
 
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
     const rows = await page.locator('//*[@id="table1"]/tbody >> tr').count();
-    const columns = await page
-      .locator('//*[@id="table1"]/tbody/tr[1] >> td')
-      .count();
+    const columns = await page.locator('//*[@id="table1"]/tbody/tr[1] >> td').count();
 
     for (let i = 1; i <= columns; i++) {
       let original = [];
       let sorted = [];
 
       for (let j = 1; j <= rows; j++) {
+        let selector = await page.locator(`//*[@id="table1"]/tbody/tr[${j}]/td[${i}]`).innerText();
         if (i !== 4) {
-          original.push(
-            await page
-              .locator(`//*[@id="table1"]/tbody/tr[${j}]/td[${i}]`)
-              .innerText()
-          );
+          original.push(selector);
         } else {
-          let test = await page
-            .locator(`//*[@id="table1"]/tbody/tr[${j}]/td[${i}]`)
-            .innerText();
+          let test = selector;
 
           test = test.slice(1);
 
@@ -761,17 +686,15 @@ test.describe("The Internet", () => {
 
       await page.click(`//*[@id="table1"]/thead/tr/th[${i}]`);
 
+      //pause between sort and grabbing sorted data
+      await delay(100);
+
       for (let j = 1; j <= rows; j++) {
+        let selector = await page.locator(`//*[@id="table1"]/tbody/tr[${j}]/td[${i}]`).innerText();
         if (i !== 4) {
-          sorted.push(
-            await page
-              .locator(`//*[@id="table1"]/tbody/tr[${j}]/td[${i}]`)
-              .innerText()
-          );
+          sorted.push(selector);
         } else {
-          let test = await page
-            .locator(`//*[@id="table1"]/tbody/tr[${j}]/td[${i}]`)
-            .innerText();
+          let test = selector;
 
           test = test.slice(1);
 
@@ -779,7 +702,6 @@ test.describe("The Internet", () => {
         }
       }
 
-      console.log(original, sorted);
       if (i !== 4) {
         original.sort();
       } else {
@@ -795,6 +717,7 @@ test.describe("The Internet", () => {
   test("Sortable Data Tables / Example 2", async ({ page }) => {
     await page.click("text = Sortable Data Tables");
 
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     let classes = [".last-name", ".first-name", ".email", ".dues", ".web-site"];
 
     await page.locator(".last-name").first().waitFor();
@@ -821,6 +744,9 @@ test.describe("The Internet", () => {
 
       await page.locator(element).nth(0).click();
 
+      //pause between sort and grabbing sorted data
+      await delay(100);
+
       if (element !== ".dues") {
         for (let i = 1; i < rows; i++) {
           sorted.push(await page.locator(element).nth(i).innerText());
@@ -835,8 +761,6 @@ test.describe("The Internet", () => {
         }
       }
 
-      console.log(original, sorted);
-      
       if (element !== ".dues") {
         original.sort();
       } else {
@@ -852,8 +776,7 @@ test.describe("The Internet", () => {
   test("Typos", async ({ page }) => {
     await page.click("text = Typos");
 
-    const text =
-      "This example demonstrates a typo being introduced. It does it randomly on each page load.";
+    const text = "This example demonstrates a typo being introduced. It does it randomly on each page load.";
     const text2 = "Sometimes you'll see a typo, other times you won't.";
 
     await expect(page.locator('//*[@id="content"]/div/p[1]')).toHaveText(text);
