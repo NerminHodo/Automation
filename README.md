@@ -1,5 +1,5 @@
 
-# the-internet automation
+# automation
 
 These are the automation tests for the-internet (https://the-internet.herokuapp.com/) and DemoQA (https://demoqa.com/) web sites
 
