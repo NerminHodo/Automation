@@ -237,7 +237,7 @@ test.describe("demoQA", () => {
 
   let src1, src2;
 
-  test.only("Broken Links - Images", async ({ page }) => {
+  test("Broken Links - Images", async ({ page }) => {
     await page.goto("https://demoqa.com/broken");
 
     const url = "https://demoqa.com";

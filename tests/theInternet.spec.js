@@ -353,7 +353,7 @@ test.describe("the-internet", () => {
     await expect(page.locator("#flash")).toContainText("Your password is invalid!");
   });
 
-  test.only("Frames / Nested Frames", async ({ page }) => {
+  test("Frames / Nested Frames", async ({ page }) => {
     await page.click("text = Frames");
     await page.click("text = Nested Frames");
 
